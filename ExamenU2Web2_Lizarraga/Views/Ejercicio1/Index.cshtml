@@ -1,0 +1,86 @@
+﻿@model List<ExamenU2Web2_Lizarraga.Models.Operacion>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Source/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Source/js/jquery-3.5.1.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ejercicio 1</title>
+</head>
+<body style="margin-left: 15%; margin-right: 15%">
+
+    <h2 class="page-header">
+        <a href="~/Ejercicio1/AgregarModificar" class="btn btn-info pull-right">
+            Nuevo Registro
+        </a>
+    </h2>
+
+
+    <br />
+
+    @using (Html.BeginForm("Index", "Ejercicio1", FormMethod.Post, new { criterio = "frmbuscar" }))
+    {
+        <div class="col">
+            @Html.RadioButton("busqueda", "T")
+            @Html.Label("Tipo operacion")
+            @Html.RadioButton("busqueda", "F")
+            @Html.Label("Fecha")
+        </div>
+
+        <div class="col">
+            @Html.Label("Buscar: ")
+            @Html.TextBox("criterio")
+            <button type="submit" class="btn btn-light">Buscar</button>
+        </div>
+    }
+
+    <br />
+
+    <table class="table">
+
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Numero 1</th>
+                <th scope="col">Numero 2</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Resultado</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var operacion in Model)
+            {
+                <tr>
+                    <td scope="row">@(operacion.operacion_id)</td>
+                    <td>@(operacion.operador1)</td>
+                    <td>@(operacion.operador2)</td>
+                    <td>@(operacion.TipoOperacion.nombre)</td>
+                    <td>@(operacion.resultado)</td>
+                    <td>@(operacion.fecha)</td>
+                    <td>@(operacion.hora)</td>
+                    <td>@(operacion.estado)</td>
+
+                    <td style="align-content: center;">
+
+                        <a href="~/Ejercicio1/AgregarModificar/@operacion.operacion_id" class="btn btn-xs btn-warning">Modificar</a>
+
+                        <a href="~/Ejercicio1/Eliminar/@operacion.operacion_id" class="btn btn-xs btn-danger" onclick="return confirm('¿Esta seguro de eliminar el registro......?');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+﻿@model ExamenU2Web2_Lizarraga.Models.Operacion
+@{
+    Layout = null;
+    List<ExamenU2Web2_Lizarraga.Models.TipoOperacion> tipo = ViewBag.Tipo;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Source/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/Source/js/jquery-3.5.1.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ejercicio 1 - Agregar</title>
+</head>
+<body style="margin-left: 15%; margin-right: 15%">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="~/Ejercicio1/Index">Ejercicio 1</a></li>
+
+            @if (Model.operacion_id > 0)
+            {
+                <li class="breadcrumb-item">@Model.operacion_id</li>
+
+            }
+            else
+            {
+                <li class="breadcrumb-item">Nuevo Registro</li>
+            }
+        </ol>
+    </nav>
+
+
+
+    @using (Html.BeginForm("Guardar", "Ejercicio1", FormMethod.Post, new { id = "frm-operacion" }))
+    {
+        @Html.HiddenFor(x => x.operacion_id)
+
+        <div class="card">
+
+            <div class="card-header">Informacion del usuario</div>
+            <div class="card-body">
+
+                <div class="card-body">
+
+                    <div class="form-group">
+
+                        @Html.Label("Id")
+                        @Html.TextBoxFor(x => x.operacion_id, new { @class = "form-control", disabled = true })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.Label("Tipo de operacion")
+
+                        <select name="tipooperacion_id" class="form-control">
+
+                            <option @(Model.tipooperacion_id.Equals("") ? "selected" : "") value="">-Seleccione-</option>)
+
+                            @foreach (var t in tipo)
+                            {
+                                <option @(Model.tipooperacion_id.Equals(t.tipooperacion_id) ? "selected" : "") value="@t.tipooperacion_id">@t.nombre</option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.Label("Numero1")
+                        @Html.TextBoxFor(x => x.operador1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.operador1, null, new { @class = "label label-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.Label("Numero2")
+                        @Html.TextBoxFor(x => x.operador2, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.operador2, null, new { @class = "label label-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Estado: ")<br />
+                        @Html.Label("Activo: ")
+                        @Html.RadioButtonFor(x => x.estado, "A         ")
+                        @Html.Label("Inactivo: ")
+                        @Html.RadioButtonFor(x => x.estado, "I         ")
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="~/Ejercicio1" class=" btn btn-danger">Cancelar</a>
+            </div>
+
+            <br /><br /><br />
+
+        </div>
+    }
+
+
+
+</body>
+</html>

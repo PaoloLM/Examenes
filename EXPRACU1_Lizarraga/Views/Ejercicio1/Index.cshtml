@@ -1,0 +1,29 @@
+﻿@model EXPRACU1_Lizarraga.Models.ClsLitro
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <form id="Ejercicio1" method="post">
+        <h1>Ingresar el consumo en litros</h1>
+        <input type="text" name="cantidad" /><br /><br />
+        <input type="submit" value="Calcular consumo" />
+    </form>
+
+    <br />
+    <hr />
+    <br />
+
+    <div>
+        <h2>Resultado</h2>
+        <p>@Model.total</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@model EXPRACU1_Lizarraga.Models.ClsUsuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    @if (Model.token == true)
+    {
+        <h2>Usuario correcto</h2>
+
+        <h4>Su nombre de usuario</h4>
+        <p>@Model.usuario</p>
+
+        <h4>Su contraseña de usuario</h4>
+        <p>@Model.contraseña</p>
+    }
+
+    else
+    {
+        <h1>Usuario incorrecto</h1><br /><br />
+        <a value="Regresar Login" href="Ejercicio2/Index" />
+    }
+</body>
+</html>
